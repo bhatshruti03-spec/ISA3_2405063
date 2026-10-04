@@ -2,33 +2,64 @@ import { useState } from "react"
 
 function Contact() {
   const [showForm, setShowForm] = useState(false)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
+  const [status, setStatus] = useState("")
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, message })
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setStatus("Message sent successfully!")
+        setName("")
+        setEmail("")
+        setMessage("")
+      }
+    } catch (error) {
+      setStatus("Unable to send message.")
+    }
+  }
 
   return (
-    <main className="page contact-page">
+    <div className="page contact-page">
       <p className="section-label">GET IN TOUCH</p>
 
-      <h1>Let’s Connect</h1>
+      <h1>Contact Me</h1>
 
       <p className="contact-text">
-        Have a project idea, opportunity, or just want to connect?
-        I’d love to hear from you.
+        Have a question or want to work together? Feel free to send me a message.
       </p>
 
       <div className="contact-info">
         <div>
-          <span>Email</span>
-          <p>your-email@example.com</p>
+          <span>EMAIL</span>
+          <p>shruti@example.com</p>
         </div>
 
         <div>
-          <span>Location</span>
+          <span>LOCATION</span>
           <p>Goa, India</p>
         </div>
       </div>
 
       <button
         className="message-button"
-        onClick={() => setShowForm(true)}
+        onClick={() => {
+          setShowForm(true)
+          setStatus("")
+        }}
       >
         Send Me a Message
       </button>
@@ -43,19 +74,42 @@ function Contact() {
               ×
             </button>
 
-            <h2>Send Me a Message</h2>
+            <h2>Send a Message</h2>
 
-            <input type="text" placeholder="Your Name" />
-            <input type="email" placeholder="Your Email" />
-            <textarea placeholder="Your Message"></textarea>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
 
-            <button className="send-button">
-              Send Message
-            </button>
+              <input
+                type="email"
+                placeholder="Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+
+              <textarea
+                placeholder="Your Message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
+              ></textarea>
+
+              <button type="submit" className="send-button">
+                Send Message
+              </button>
+            </form>
+
+            {status && <p style={{ marginTop: "15px" }}>{status}</p>}
           </div>
         </div>
       )}
-    </main>
+    </div>
   )
 }
 
