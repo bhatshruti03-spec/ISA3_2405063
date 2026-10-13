@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5174",
+    "server": "node Server/server.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

@@ -8,14 +8,16 @@ function About() {
       <div className="about-content">
         <div>
           <h2>Who I Am</h2>
+
           <p>
-            I am Shruti Bhat, a BCA student with an interest in
-            web development and creating simple, useful digital
-            experiences.
+            I am Shruti Bhat, a Bachelor of Computer Applications student
+            interested in web development and creating practical digital
+            solutions.
           </p>
+
           <p>
-            I enjoy learning new technologies, working on practical
-            projects, and improving my development skills.
+            I enjoy learning new technologies, building projects, and
+            improving my skills through practical experience.
           </p>
         </div>
 
@@ -27,9 +29,8 @@ function About() {
             <span>CSS</span>
             <span>JavaScript</span>
             <span>React</span>
-            <span>Node.js</span>
+            <span>Python</span>
             <span>MySQL</span>
-            <span>Git & GitHub</span>
           </div>
         </div>
       </div>

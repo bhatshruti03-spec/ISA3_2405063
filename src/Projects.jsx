@@ -1,4 +1,25 @@
 function Projects() {
+  const projects = [
+    {
+      title: "D-Link Admin Portal",
+      description:
+        "An internal administrative portal developed during my internship to manage employees, attendance, leaves, notifications and administrative activities.",
+      tech: "React • Node.js • MySQL",
+    },
+    {
+      title: "Birthday Website",
+      description:
+        "A creative birthday-themed website designed with an interactive and visually engaging user experience.",
+      tech: "HTML • CSS • JavaScript",
+    },
+    {
+      title: "Bakery Website",
+      description:
+        "A responsive bakery website designed to showcase bakery products with a clean and user-friendly interface.",
+      tech: "HTML • CSS • JavaScript",
+    },
+  ]
+
   return (
     <main className="page">
       <p className="section-label">MY WORK</p>
@@ -6,35 +27,17 @@ function Projects() {
       <h1>Projects</h1>
 
       <div className="projects-grid">
-        <div className="project-card">
-          <span>01</span>
-          <h2>D-Link Admin Portal</h2>
-          <p>
-            An internal administrative portal designed to manage
-            employees, attendance, leaves and other administrative tasks.
-          </p>
-          <small>React • Node.js • MySQL</small>
-        </div>
+        {projects.map((project, index) => (
+          <div className="project-card" key={index}>
+            <span className="project-number">0{index + 1}</span>
 
-        <div className="project-card">
-          <span>02</span>
-          <h2>Personal Portfolio</h2>
-          <p>
-            A responsive portfolio website created to showcase my
-            skills, projects, education and achievements.
-          </p>
-          <small>React • CSS • Node.js</small>
-        </div>
+            <h2>{project.title}</h2>
 
-        <div className="project-card">
-          <span>03</span>
-          <h2>Academic Project</h2>
-          <p>
-            A web-based project developed as part of my BCA academic
-            learning and practical experience.
-          </p>
-          <small>Web Development</small>
-        </div>
+            <p>{project.description}</p>
+
+            <small>{project.tech}</small>
+          </div>
+        ))}
       </div>
     </main>
   )

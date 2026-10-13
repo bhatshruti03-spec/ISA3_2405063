@@ -5,7 +5,7 @@ function Home() {
 
       <h1>Shruti Bhat</h1>
 
-      <h2>BCA Student & Aspiring Developer</h2>
+      <h2>BCA Student </h2>
 
       <p className="home-text">
         I create clean, user-friendly web experiences and enjoy

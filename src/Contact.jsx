@@ -1,17 +1,22 @@
 import { useState } from "react"
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"
+
 function Contact() {
   const [showForm, setShowForm] = useState(false)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const [status, setStatus] = useState("")
+  const [sending, setSending] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSending(true)
+    setStatus("")
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -26,9 +31,13 @@ function Contact() {
         setName("")
         setEmail("")
         setMessage("")
+      } else {
+        setStatus(data.message || "Unable to send message.")
       }
-    } catch (error) {
+    } catch {
       setStatus("Unable to send message.")
+    } finally {
+      setSending(false)
     }
   }
 
@@ -45,7 +54,7 @@ function Contact() {
       <div className="contact-info">
         <div>
           <span>EMAIL</span>
-          <p>shruti@example.com</p>
+          <p>bhatshruti@gmail.com</p>
         </div>
 
         <div>
@@ -100,8 +109,8 @@ function Contact() {
                 required
               ></textarea>
 
-              <button type="submit" className="send-button">
-                Send Message
+              <button type="submit" className="send-button" disabled={sending}>
+                {sending ? "Sending..." : "Send Message"}
               </button>
             </form>
 
